@@ -1,4 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/security/tags"
+	prefix="security"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -16,17 +18,14 @@
 	<div class="container mt-3">
 		<h2>Cadastramento de Funcionarios</h2>
 
-		<c:if test="${not empty mensagem}">
-			<div class="alert alert-success">
-				<strong>Confirmação!</strong> ${mensagem}
-			</div>
-		</c:if>
+		<security:authorize access="hasRole('ADMIN')">
 
-		<form action="/funcionario" method="get">
-			<button type="submit" class="btn btn-primary">Novo</button>
-		</form>
+			<form action="/funcionario" method="get">
+				<button type="submit" class="btn btn-primary">Novo</button>
+			</form>
 
-		<hr>
+			<hr>
+		</security:authorize>
 
 		<c:if test="${not empty listaFuncionarios}">
 			<h2>Total de Funcionarios: ${listaFuncionarios.size()}</h2>
@@ -55,7 +54,11 @@
 							<td>${s.email}</td>
 							<td>${s.telefone}</td>
 							<td>${s.nomeEstabelecimento}</td>
-							<td><a href="/funcionario/${s.id}/excluir">excluir</a></td>
+
+							<security:authorize access="hasRole('ADMIN')">
+								<td><a href="/funcionario/${s.id}/excluir">excluir</a></td>
+							</security:authorize>
+
 						</tr>
 					</c:forEach>
 				</tbody>

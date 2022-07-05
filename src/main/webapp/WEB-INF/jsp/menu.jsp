@@ -11,5 +11,11 @@
 			<li><a href="/funcionarios">Funcionarios</a></li>
 		</ul>
 
+		<ul class="nav navbar-nav navbar-right">
+			<li><a href="/logout">Logout</a></li>
+			<li><a href="/usuario">Sign up</a></li>
+			<li><a href="/login">Login</a></li>
+		</ul>
+
 	</div>
 </nav>
